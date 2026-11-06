@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (data.type === 'message') {
       appendMessage(data.content, 'received', data.messageId);
       ws.send(JSON.stringify({ type: 'delivered', messageId: data.messageId }));
+      ws.send(JSON.stringify({ type: 'read', messageId: data.messageId }));
     } else if (data.type === 'sent') {
       appendMessage(data.content, 'sent', data.messageId);
     } else if (data.type === 'delivered') {
@@ -93,23 +94,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="meta">
         <span class="status-tag ${statusClass}">${direction === 'sent' ? 'SENT' : 'RECEIVED'}</span>
     `;
-    if (direction === 'received') {
-      html += `<button class="mark-read-btn" data-message-id="${messageId}">Mark as read</button>`;
-    }
     html += `</div>`;
     div.innerHTML = html;
     messagesDiv.appendChild(div);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-    if (direction === 'received') {
-      const btn = div.querySelector('.mark-read-btn');
-      btn.addEventListener('click', () => {
-        ws.send(JSON.stringify({ type: 'read', messageId }));
-        btn.textContent = 'Read';
-        btn.classList.add('marked');
-        btn.disabled = true;
-      });
-    }
   }
 
   function updateMessageStatus(messageId, status) {

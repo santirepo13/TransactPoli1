@@ -36,6 +36,3 @@ main { background: white; border-radius: 0 0 8px 8px; box-shadow: 0 2px 5px rgba
 .message-input { display: flex; gap: 10px; padding: 15px 20px; border-top: 1px solid #eee; }
 #messageInput { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; }
 #sendBtn { width: auto; padding: 10px 20px; }
-.message.received .mark-read-btn { margin-left: 8px; padding: 2px 6px; font-size: 0.7rem; background: #6c757d; color: white; border: none; border-radius: 3px; cursor: pointer; }
-.message.received .mark-read-btn:hover { background: #545b62; }
-.message.received .mark-read-btn.marked { background: #28a745; cursor: default; }
