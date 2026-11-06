@@ -1,6 +1,7 @@
 let ws = null;
 let currentUser = null;
 let messageIdCounter = 0;
+const unreadMessageIds = new Set();
 
 document.addEventListener('DOMContentLoaded', async () => {
   const userSpan = document.getElementById('currentUser');
@@ -69,8 +70,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (data.type === 'message') {
       appendMessage(data.content, 'received', data.messageId);
+      unreadMessageIds.add(data.messageId);
       ws.send(JSON.stringify({ type: 'delivered', messageId: data.messageId }));
-      ws.send(JSON.stringify({ type: 'read', messageId: data.messageId }));
     } else if (data.type === 'sent') {
       appendMessage(data.content, 'sent', data.messageId);
     } else if (data.type === 'delivered') {
@@ -126,4 +127,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   window.addEventListener('beforeunload', () => {
     if (ws) ws.close();
   });
+
+  function markUnreadMessagesAsRead() {
+    if (!ws || ws.readyState !== WebSocket.OPEN) return;
+
+    for (const messageId of unreadMessageIds) {
+      ws.send(JSON.stringify({ type: 'read', messageId }));
+    }
+
+    unreadMessageIds.clear();
+  }
+
+  window.addEventListener('click', markUnreadMessagesAsRead);
 });
