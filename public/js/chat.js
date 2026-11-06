@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       appendMessage(data.content, 'received', data.messageId);
       ws.send(JSON.stringify({ type: 'delivered', messageId: data.messageId }));
     } else if (data.type === 'sent') {
-      updateMessageStatus(data.messageId, 'sent');
+      appendMessage(data.content, 'sent', data.messageId);
     } else if (data.type === 'delivered') {
       updateMessageStatus(data.messageId, 'delivered');
     } else if (data.type === 'read') {

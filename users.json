@@ -1,6 +1,6 @@
 {
   "users": [
-    {"id":"computer1","username":"Computer 1","password":"password1"},
-    {"id":"computer2","username":"Computer 2","password":"password2"}
+    {"id":"computer1","username":"Computer_1","password":"password1"},
+    {"id":"computer2","username":"Computer_2","password":"password2"}
   ]
 }

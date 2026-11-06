@@ -29,7 +29,11 @@ function setupWebSocket(server, sessions, connections, users, messageStore) {
         if (message.type === 'message') {
           const result = await processMessage(message, userId, connections, messageStore);
           if (result.success) {
-            ws.send(JSON.stringify({ type: 'sent', messageId: result.messageId }));
+            ws.send(JSON.stringify({
+              type: 'sent',
+              messageId: result.messageId,
+              content: result.content
+            }));
             console.log(`[MSG] ${result.messageId} from=${userId} to=${message.to} status=SENT`);
           } else {
             ws.send(JSON.stringify({ type: 'error', error: result.error }));

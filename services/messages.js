@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const WebSocket = require('ws');
 
 function initializeMessages(messageStore, maxLength) {
   messageStore.maxLength = maxLength;
@@ -47,7 +48,7 @@ async function processMessage(message, fromUserId, connections, messageStore) {
     }));
   }
 
-  return { success: true, messageId };
+  return { success: true, messageId, content };
 }
 
 async function sendAck(ackMessage, fromUserId, connections, messageStore) {
