@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat - Client Server Simulation</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Messaging Simulation</h1>
+      <div class="status-bar">
+        <span id="currentUser"></span>
+        <span id="connectionStatus" class="status disconnected">Disconnected</span>
+        <span id="peerStatus" class="status offline">Peer: Offline</span>
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </header>
+    <main>
+      <div id="messages" class="messages"></div>
+      <div class="message-input">
+        <input type="text" id="messageInput" placeholder="Type a message..." maxlength="500" disabled>
+        <button id="sendBtn" disabled>Send</button>
+      </div>
+    </main>
+  </div>
+  <script src="/js/chat.js"></script>
+</body>
+</html>
